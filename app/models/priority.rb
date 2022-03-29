@@ -1,5 +1,5 @@
 class Priority < ActiveRecord::Base
-    has_many :tasks
+    has_many :task_defs
 
     #Class Methods
     #Getter Methods

@@ -13,3 +13,7 @@ use Rack::JSONBodyParser
 
 # Our application
 run ApplicationController
+use TaskTimesController
+use TaskDefsController
+use CategoriesController
+use PrioritiesController

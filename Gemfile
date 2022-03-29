@@ -38,6 +38,10 @@ gem "require_all", "~> 3.0"
 group :development do
   gem "pry", "~> 0.14.1"
 
+  # Fake Data for seeds
+  # https://github.com/faker-ruby/faker
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  
   # Automatically reload when there are changes
   # https://github.com/alexch/rerun
   gem "rerun"

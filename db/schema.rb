@@ -10,17 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_28_170910) do
+ActiveRecord::Schema.define(version: 2022_03_29_151750) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-  end
-
-  create_table "days", force: :cascade do |t|
-    t.date "date"
-    t.integer "day_of_week"
-    t.boolean "special_date"
-    t.string "special_date_desc"
   end
 
   create_table "priorities", force: :cascade do |t|
@@ -28,42 +21,23 @@ ActiveRecord::Schema.define(version: 2022_03_28_170910) do
     t.string "description"
   end
 
-  create_table "repeated_tasks", force: :cascade do |t|
-    t.integer "start_day_id"
-    t.integer "end_day_id"
+  create_table "task_defs", force: :cascade do |t|
     t.integer "category_id"
     t.integer "priority_id"
-    t.integer "interval_value"
-    t.string "interval_unit"
     t.string "title"
     t.string "description"
+    t.string "repetition_rule"
     t.string "location"
-    t.time "start_time"
-    t.time "end_time"
     t.boolean "background_task"
-    t.index ["category_id"], name: "index_repeated_tasks_on_category_id"
-    t.index ["end_day_id"], name: "index_repeated_tasks_on_end_day_id"
-    t.index ["priority_id"], name: "index_repeated_tasks_on_priority_id"
-    t.index ["start_day_id"], name: "index_repeated_tasks_on_start_day_id"
+    t.index ["category_id"], name: "index_task_defs_on_category_id"
+    t.index ["priority_id"], name: "index_task_defs_on_priority_id"
   end
 
-  create_table "tasks", force: :cascade do |t|
-    t.integer "start_day_id"
-    t.integer "end_day_id"
-    t.integer "category_id"
-    t.integer "priority_id"
-    t.integer "repeated_task_id"
-    t.string "title"
-    t.string "description"
-    t.string "location"
-    t.time "start_time"
-    t.time "end_time"
-    t.boolean "background_task"
-    t.index ["category_id"], name: "index_tasks_on_category_id"
-    t.index ["end_day_id"], name: "index_tasks_on_end_day_id"
-    t.index ["priority_id"], name: "index_tasks_on_priority_id"
-    t.index ["repeated_task_id"], name: "index_tasks_on_repeated_task_id"
-    t.index ["start_day_id"], name: "index_tasks_on_start_day_id"
+  create_table "task_times", force: :cascade do |t|
+    t.integer "task_def_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.index ["task_def_id"], name: "index_task_times_on_task_def_id"
   end
 
 end

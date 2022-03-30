@@ -24,9 +24,9 @@ Priority.create(value: 5, description: "Optional")
 
 puts "Seeding task defs and times..."
 10.times do |i|
-    td = TaskDef.create(category: Category.all.sample, priority: Priority.all.sample, title: Faker::Company.bs, description: Faker::ChuckNorris.fact, background_task: true)
+    td = TaskDef.create(category: Category.all.sample, priority: Priority.all.sample, title: Faker::Company.bs, description: Faker::ChuckNorris.fact)
     times = [Faker::Time.between(from: Date.today+i-5,to: Date.today+i-4), Faker::Time.between(from: Date.today+i-5,to: Date.today+i-4)]
-    TaskTime.create(task_def: td, start: times.min, end: times.max)
+    TaskTime.create(task_def: td, startDate: times.min, endDate: times.max)
 end
 
 puts "✅ Done seeding!"

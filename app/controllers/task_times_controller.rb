@@ -10,23 +10,46 @@ class TaskTimesController < ApplicationController
     end
 
     patch '/task_times/:id' do
-        task_time = TaskTime.find(params[:id])
-        task_time.update(params)
-        task_time.to_json
+        tt = TaskTime.find(params[:id])
+        td_columns = TaskDef.column_names
+        tt_columns = TaskTime.column_names
+        td_attr = {}
+        tt_attr = {}
+        td_columns.each do |name|
+            if params.keys.include?(name)
+                td_attr[name.to_sym] = params[name]
+            end
+        end
+
+        if !td_attr.empty?
+            td = TaskDef.find(tt.task_def_id)
+            td.update(td_attr)
+        end
+
+        tt_columns.each do |name|
+            if params.keys.include?(name)
+                tt_attr[name.to_sym] = params[name]
+            end
+        end
+
+        if !tt_attr.empty?
+            tt.update(tt_attr)
+        end
+        #binding.pry
+        tt.to_json(include: :task_def)
     end
 
     post '/task_times' do
         columns = TaskDef.column_names
         attributes = {}
         columns.each do |name|
-            sym = name.to_sym
-            if params.keys.include?(sym)
-                attributes[sym] = params[sym]
+            if params.keys.include?(name)
+                attributes[name.to_sym] = params[name]
             end
         end
-        task_def_attr
         td = TaskDef.create(attributes)
-        TaskTime.create(task_def: td, start: params[:startDate], end: params[:endDate]).to_json
+        tt = TaskTime.create(task_def: td, startDate: params[:startDate], endDate: params[:endDate])
+        tt.to_json(include: :task_def)
     end
 
 end

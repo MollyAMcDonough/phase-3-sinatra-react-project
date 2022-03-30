@@ -7,7 +7,6 @@ class CreateTaskDefs < ActiveRecord::Migration[6.1]
       t.string :description
       t.string :repetition_rule
       t.string :location
-      t.boolean :background_task
     end
   end
 end

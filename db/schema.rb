@@ -28,15 +28,14 @@ ActiveRecord::Schema.define(version: 2022_03_29_151750) do
     t.string "description"
     t.string "repetition_rule"
     t.string "location"
-    t.boolean "background_task"
     t.index ["category_id"], name: "index_task_defs_on_category_id"
     t.index ["priority_id"], name: "index_task_defs_on_priority_id"
   end
 
   create_table "task_times", force: :cascade do |t|
     t.integer "task_def_id"
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "startDate"
+    t.datetime "endDate"
     t.index ["task_def_id"], name: "index_task_times_on_task_def_id"
   end
 

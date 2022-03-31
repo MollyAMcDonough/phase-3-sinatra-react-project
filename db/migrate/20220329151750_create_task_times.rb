@@ -4,6 +4,7 @@ class CreateTaskTimes < ActiveRecord::Migration[6.1]
       t.references :task_def
       t.datetime :startDate
       t.datetime :endDate
+      t.boolean :allDay
     end
   end
 end

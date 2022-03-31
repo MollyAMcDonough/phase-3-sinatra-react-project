@@ -5,7 +5,7 @@ class CreateTaskDefs < ActiveRecord::Migration[6.1]
       t.references :priority
       t.string :title
       t.string :description
-      t.string :repetition_rule
+      t.string :rRule
       t.string :location
     end
   end

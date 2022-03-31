@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_151750) do
     t.integer "priority_id"
     t.string "title"
     t.string "description"
-    t.string "repetition_rule"
+    t.string "rRule"
     t.string "location"
     t.index ["category_id"], name: "index_task_defs_on_category_id"
     t.index ["priority_id"], name: "index_task_defs_on_priority_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_151750) do
     t.integer "task_def_id"
     t.datetime "startDate"
     t.datetime "endDate"
+    t.boolean "allDay"
     t.index ["task_def_id"], name: "index_task_times_on_task_def_id"
   end
 

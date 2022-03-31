@@ -40,6 +40,7 @@ class TaskTimesController < ApplicationController
     end
 
     post '/task_times' do
+        binding.pry
         columns = TaskDef.column_names
         attributes = {}
         columns.each do |name|
@@ -48,7 +49,7 @@ class TaskTimesController < ApplicationController
             end
         end
         td = TaskDef.create(attributes)
-        tt = TaskTime.create(task_def: td, startDate: params[:startDate], endDate: params[:endDate])
+        tt = TaskTime.create(task_def: td, startDate: params[:startDate], endDate: params[:endDate], allDay: params[:allDay])
         tt.to_json(include: :task_def)
     end
 

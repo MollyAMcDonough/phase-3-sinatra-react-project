@@ -1,7 +1,7 @@
 class TaskTimesController < ApplicationController
     # Get endpoints
     get '/task_times' do
-        TaskTime.all.to_json(include: :task_def)
+        TaskDef.all.to_json(include: :task_times)
     end
  
     # Post, Patch, Delete endpoints
@@ -36,11 +36,10 @@ class TaskTimesController < ApplicationController
             tt.update(tt_attr)
         end
         #binding.pry
-        tt.to_json(include: :task_def)
+        td.to_json(include: :task_times)
     end
 
     post '/task_times' do
-        binding.pry
         columns = TaskDef.column_names
         attributes = {}
         columns.each do |name|
@@ -49,8 +48,16 @@ class TaskTimesController < ApplicationController
             end
         end
         td = TaskDef.create(attributes)
-        tt = TaskTime.create(task_def: td, startDate: params[:startDate], endDate: params[:endDate], allDay: params[:allDay])
-        tt.to_json(include: :task_def)
+        if !params.keys.include?("recurringDates")
+            tt = TaskTime.create(task_def: td, startDate: params[:startDate], endDate: params[:endDate], allDay: params[:allDay])
+        else
+            params[:recurringDates].each do |tt|
+                TaskTime.create(task_def: td, startDate: tt[:startDate], endDate: tt[:endDate], allDay: tt[:allDay])
+            end
+        end
+        puts td.to_json(include: :task_times)
+        td.to_json(include: :task_times)
+
     end
 
 end

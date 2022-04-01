@@ -6,6 +6,7 @@ class CreateTaskDefs < ActiveRecord::Migration[6.1]
       t.string :title
       t.string :description
       t.string :rRule
+      t.string :exDate, default: ""
       t.string :location
     end
   end

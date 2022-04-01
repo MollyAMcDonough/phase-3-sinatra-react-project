@@ -35,12 +35,11 @@ class TaskTimesController < ApplicationController
         if !tt_attr.empty?
             tt.update(tt_attr)
         end
-        # binding.pry
+
         td.to_json(include: :task_times)
     end
 
     post '/task_times' do
-        # binding.pry
         columns = TaskDef.column_names
         attributes = {}
         columns.each do |name|
@@ -56,7 +55,6 @@ class TaskTimesController < ApplicationController
                 TaskTime.create(task_def: td, startDate: tt[:startDate], endDate: tt[:endDate], allDay: tt[:allDay])
             end
         end
-        puts td.to_json(include: :task_times)
         td.to_json(include: :task_times)
 
     end

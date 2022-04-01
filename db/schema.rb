@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_151750) do
     t.string "title"
     t.string "description"
     t.string "rRule"
+    t.string "exDate", default: ""
     t.string "location"
     t.index ["category_id"], name: "index_task_defs_on_category_id"
     t.index ["priority_id"], name: "index_task_defs_on_priority_id"

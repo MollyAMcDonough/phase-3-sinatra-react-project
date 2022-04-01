@@ -28,5 +28,10 @@ puts "Seeding task defs and times..."
     times = [Faker::Time.between(from: Date.today+i-5,to: Date.today+i-4), Faker::Time.between(from: Date.today+i-5,to: Date.today+i-4)]
     TaskTime.create(task_def: td, startDate: times.min, endDate: times.max, allDay: false)
 end
+2.times do |i|
+    td = TaskDef.create(rRule:'RRULE:INTERVAL=1;FREQ=DAILY;COUNT=3',category: Category.all.sample, priority: Priority.all.sample, title: Faker::Company.bs, description: Faker::ChuckNorris.fact)
+    times = [Faker::Time.between(from: Date.today+i-5,to: Date.today+i-4), Faker::Time.between(from: Date.today+i-5,to: Date.today+i-4)]
+    TaskTime.create(task_def: td, startDate: times.min, endDate: times.max, allDay: false)
+end
 
 puts "✅ Done seeding!"

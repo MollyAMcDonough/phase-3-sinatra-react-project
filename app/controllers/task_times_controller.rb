@@ -35,11 +35,12 @@ class TaskTimesController < ApplicationController
         if !tt_attr.empty?
             tt.update(tt_attr)
         end
-        #binding.pry
+        # binding.pry
         td.to_json(include: :task_times)
     end
 
     post '/task_times' do
+        # binding.pry
         columns = TaskDef.column_names
         attributes = {}
         columns.each do |name|
